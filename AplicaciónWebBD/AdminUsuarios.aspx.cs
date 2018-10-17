@@ -107,27 +107,28 @@ public partial class AdminUsuarios : System.Web.UI.Page
   protected void BtnEjecuta_Click(object sender, EventArgs e) {
     String oper;
 
-    oper = Session["Operación"].ToString();
-    switch (oper) {
-      case "Alta":
-        alta();
-        break;
-      case "Baja":
-        baja();
-        break;
-      case "Cambio":
-        //cambio();
-        break;
+    if (Page.IsValid) {
+      oper = Session["Operación"].ToString();
+      switch (oper) {
+        case "Alta":
+          alta();
+          break;
+        case "Baja":
+          baja();
+          break;
+        case "Cambio":
+          //cambio();
+          break;
+      }
+
+      TxtRFC.Visible = false; TxtNombre.Visible = false;
+      TxtPassw.Visible = false;
+      //TxtPassw.TextMode = TextBoxMode.Password;   //Para que aparezcan asteriscos al dar la contra.
+      TxtDomicilio.Visible = false; TxtCat.Visible = false;
+      DDLTipo.Text = "Tipo de usuario"; DDLTipo.Visible = false; DDLUsuarios.Visible = false;
+      BtnAlta.Enabled = true; BtnBaja.Enabled = true; BtnCambio.Enabled = true;
+      BtnEjecuta.Enabled = false; LblMensaje.Text = "En espera";
     }
-
-    TxtRFC.Visible = false; TxtNombre.Visible = false;
-    TxtPassw.Visible = false;
-    //TxtPassw.TextMode = TextBoxMode.Password;   //Para que aparezcan asteriscos al dar la contra.
-    TxtDomicilio.Visible = false; TxtCat.Visible = false;
-    DDLTipo.Text = "Tipo de usuario"; DDLTipo.Visible = false; DDLUsuarios.Visible = false;
-    BtnAlta.Enabled = true; BtnBaja.Enabled = true; BtnCambio.Enabled = true;
-    BtnEjecuta.Enabled = false; LblMensaje.Text = "En espera";
-
   }
 
   protected void TxtRFC_TextChanged(object sender, EventArgs e) {

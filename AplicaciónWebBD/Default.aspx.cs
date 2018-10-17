@@ -22,7 +22,7 @@ public partial class _Default : System.Web.UI.Page {
     //La propiedad, de la página, IsPostBack da False la 1a. vez que se carga la págiona.
     //Después siempre da True.
     if (!IsPostBack) {
-      GestorBD = new GestorBD.GestorBD("MSDAORA", "bdalumno", "estudia", "oracle");
+      GestorBD = new GestorBD.GestorBD("MSDAORA", "bd07", "fercab", "oracle");
       Session["GestorBD"] = GestorBD;
     }
   }
@@ -58,7 +58,6 @@ public partial class _Default : System.Web.UI.Page {
             {
                 Server.Transfer("AdminUsuarios.aspx");
             }
-            
         }
   }
 }
