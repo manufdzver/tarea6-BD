@@ -45,7 +45,7 @@ public partial class _Default : System.Web.UI.Page {
         if (DsGeneral.Tables["Usuario"].Rows.Count != 0) {
             Session["rfc"] = Login1.UserName;     //Sí, guarda el RFC del usuario.
 
-            cadSql2 = "select * from PCEmpleados where RFC='" + Login1.UserName +
+            cadSql2 = "select * from PCEmpleados where RFC='" + Session["rfc"].ToString() +
                 "' and Categoría != 'Gerente'";
 
             GestorBD.consBD(cadSql2, DsEmpleado, "Empleado");

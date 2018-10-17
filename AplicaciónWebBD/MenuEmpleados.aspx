@@ -9,11 +9,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="background-color: #00FFFF; height: 377px;">
+    <div style="background-color: #00FFFF; height: 377px; width: 791px;">
     
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="z-index: 1; left: 459px; top: 157px; position: absolute; height: 56px; width: 165px" Text="Admin Usuarios" />
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" style="z-index: 1; left: 141px; top: 160px; position: absolute; height: 58px; width: 178px" Text="Altas Pagos Clientes" />
-        <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" style="z-index: 1; top: 156px; position: absolute; left: 746px; height: 55px; width: 188px" Text="Lista Pedidos" />
         <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 142px; top: 80px; position: absolute" Text="Escoga la opción que quiera realizar:"></asp:Label>
     
     </div>
