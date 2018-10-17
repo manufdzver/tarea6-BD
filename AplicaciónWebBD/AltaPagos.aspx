@@ -12,7 +12,7 @@
     <div style="background-color: #C0C0C0; height: 439px;">
     
         <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 65px; top: 38px; position: absolute" Text="Clientes"></asp:Label>
-        <asp:DropDownList ID="DropDownList1" runat="server" style="z-index: 1; left: 194px; top: 35px; position: absolute; height: 16px; width: 166px">
+        <asp:DropDownList ID="DropDownList1" runat="server" style="z-index: 1; left: 194px; top: 35px; position: absolute; height: 16px; width: 166px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:Label ID="Label2" runat="server" style="z-index: 1; left: 67px; top: 94px; position: absolute" Text="Claves Pedidos" Visible="False"></asp:Label>
     
