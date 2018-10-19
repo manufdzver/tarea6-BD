@@ -73,7 +73,8 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 
         //con los datos de cada pago realizado por el cliente para ese pedido: 
-        //clave, fecha y monto del pago (posiblemente aquí puedas reutilizar código). 
+        //clave, fecha y monto del pago (posiblemente aquí puedas reutilizar código).
+         
     }
 
 }
