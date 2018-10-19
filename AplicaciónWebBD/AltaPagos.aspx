@@ -33,9 +33,9 @@
         <asp:Table ID="Table1" runat="server" Width="764px" Visible="False">
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server">Fecha</asp:TableCell>
-                <asp:TableCell runat="server">Suma monto</asp:TableCell>
-                <asp:TableCell runat="server">Pagos realizados</asp:TableCell>
-                <asp:TableCell runat="server">Pagos por cubrir</asp:TableCell>
+                <asp:TableCell runat="server">Monto a Pagar</asp:TableCell>
+                <asp:TableCell runat="server">Monto Pagado</asp:TableCell>
+                <asp:TableCell runat="server">Debe</asp:TableCell>
             </asp:TableRow>
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server"></asp:TableCell>

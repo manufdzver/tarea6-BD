@@ -59,16 +59,19 @@ public partial class AltasEmpleados : System.Web.UI.Page
       Table1.Visible = true;
 
       GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
-      cadSql = "select fechaPed, saldoCli, saldoFacs, sum(Monto) as sum from PCPedidos p, PCClientes c, PCEmpleados e where p.RFCC = '"+
-    DropDownList1.SelectedValue+"' and p.RFCE = '"+ Session["rfc"].ToString()+
-    "' and p.RFCC = c.RFC and p.RFCE = e.RFC group by fechaPed, SaldoCli, saldoFacs";
+      cadSql = "select fechaPed, pe.monto, sum(distinct(pa.monto)) as saldo, pe.monto-sum(distinct(pa.monto)) as deuda " +
+            "from PCPagos pa, PCPedidos pe, PCClientes c, PCEmpleados e where pe.RFCC = '"+
+            DropDownList1.SelectedValue+"' and pe.RFCE = '"+ Session["rfc"].ToString()+
+            "' and pe.foliop=pa.folioP and pe.folioP='"+DropDownList2.SelectedValue+"' "+
+            "group by fechaPed, pe.monto";
       GestorBD.consBD(cadSql, DsPagos, "Pedidos");
     //Despliega los datos en la tabla.
+
     Fila = DsPagos.Tables["Pedidos"].Rows[0];
     Table1.Rows[1].Cells[0].Text = Fila["FechaPed"].ToString();
-    Table1.Rows[1].Cells[1].Text = Fila["SaldoCli"].ToString();
-    Table1.Rows[1].Cells[2].Text = Fila["SaldoFacs"].ToString();
-    Table1.Rows[1].Cells[3].Text = Fila["Sum"].ToString();
+    Table1.Rows[1].Cells[1].Text = Fila["monto"].ToString();
+    Table1.Rows[1].Cells[2].Text = Fila["saldo"].ToString();
+    Table1.Rows[1].Cells[3].Text = Fila["deuda"].ToString();
 
 
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 
