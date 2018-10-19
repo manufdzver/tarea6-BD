@@ -68,7 +68,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
     Table1.Rows[1].Cells[0].Text = Fila["FechaPed"].ToString();
     Table1.Rows[1].Cells[1].Text = Fila["SaldoCli"].ToString();
     Table1.Rows[1].Cells[2].Text = Fila["SaldoFacs"].ToString();
-    Table1.Rows[1].Cells[2].Text = Fila["Sum"].ToString();
+    Table1.Rows[1].Cells[3].Text = Fila["Sum"].ToString();
 
 
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 

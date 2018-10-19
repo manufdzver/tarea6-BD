@@ -30,7 +30,7 @@
         <br />
         <br />
         <br />
-        <asp:Table ID="Table1" runat="server" Width="764px">
+        <asp:Table ID="Table1" runat="server" Width="764px" Visible="False">
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server">Fecha</asp:TableCell>
                 <asp:TableCell runat="server">Suma monto</asp:TableCell>
