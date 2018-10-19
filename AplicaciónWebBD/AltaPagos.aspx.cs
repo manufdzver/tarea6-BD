@@ -66,13 +66,21 @@ public partial class AltasEmpleados : System.Web.UI.Page
             "' and pe.foliop=pa.folioP and pe.folioP='"+DropDownList2.SelectedValue+"' "+
             "group by fechaPed, pe.monto";
       GestorBD.consBD(cadSql, DsPagos, "Pedidos");
-    //Despliega los datos en la tabla.
+        //Despliega los datos en la tabla.
 
-    Fila = DsPagos.Tables["Pedidos"].Rows[0];
-    Table1.Rows[1].Cells[0].Text = Fila["FechaPed"].ToString();
-    Table1.Rows[1].Cells[1].Text = Fila["monto"].ToString();
-    Table1.Rows[1].Cells[2].Text = Fila["saldo"].ToString();
-    Table1.Rows[1].Cells[3].Text = Fila["deuda"].ToString();
+        if (DsPagos.Tables["Pedidos"].Rows.Count > 0) {
+            Fila = DsPagos.Tables["Pedidos"].Rows[0];
+            Table1.Rows[1].Cells[0].Text = Fila["FechaPed"].ToString();
+            Table1.Rows[1].Cells[1].Text = Fila["monto"].ToString();
+            Table1.Rows[1].Cells[2].Text = Fila["saldo"].ToString();
+            Table1.Rows[1].Cells[3].Text = Fila["deuda"].ToString();
+        }
+        else {
+            Response.Write("Error, el cliente no ha hecho ningun pago");
+            
+        }
+
+    
 
 
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 
