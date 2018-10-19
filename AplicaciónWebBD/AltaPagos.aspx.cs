@@ -14,10 +14,9 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
   DataSet DsClientes = new DataSet();
   DataSet DsPedidos = new DataSet();
-  DataSet DsPagos = new DataSet();
-  DataRow Fila;
-
-
+    DataSet DsPagos = new DataSet();
+    DataSet DsPagos2 = new DataSet();
+    DataRow Fila;
 
   protected void Page_Load(object sender, EventArgs e)
   {
@@ -57,7 +56,9 @@ public partial class AltasEmpleados : System.Web.UI.Page
       //    pagos que se han realizado para el mismo y el saldo que resta por cubrir.
       //    Si no tiene pagos, muestra un mensaje adecuado.
       Table1.Visible = true;
-
+        btAlta.Visible = true;
+        btBaja.Visible = true;
+        btMod.Visible = true;
       GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
       cadSql = "select fechaPed, pe.monto, sum(distinct(pa.monto)) as saldo, pe.monto-sum(distinct(pa.monto)) as deuda " +
             "from PCPagos pa, PCPedidos pe, PCClientes c, PCEmpleados e where pe.RFCC = '"+
@@ -77,7 +78,45 @@ public partial class AltasEmpleados : System.Web.UI.Page
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 
         //con los datos de cada pago realizado por el cliente para ese pedido: 
         //clave, fecha y monto del pago (posiblemente aquí puedas reutilizar código).
-         
+        cadSql = "select distinct f.idPago, f.fecha, f.monto from PCPagos f, PCPedidos p where " +
+            "f.FolioP = '" + DropDownList2.SelectedValue + "' order by f.idPago asc";
+        GestorBD.consBD(cadSql, DsPagos2, "Pagos2");
+        GridView1.DataSource = DsPagos2.Tables["Pagos2"];  //Muestra resultados.
+        GridView1.DataBind();
+
+        //Muestra los pagos realizados para el pedido seleccionado.
+        //cadSql = "select * from PCPagos where FolioP=" + DDLPedidos.Text;
+        //GestorBD.consBD(cadSql, DsPagos, "Pagos");
+        //GrdPagos.DataSource = DsPagos.Tables["Pagos"];  //Muestra resultados.
+        //GrdPagos.DataBind();
     }
 
+
+    protected void btAlta_Click(object sender, EventArgs e)
+    {
+        Label3.Visible = true;
+        Label4.Visible = true;
+        TextBox1.Visible = true;
+        TextBox2.Visible = true;
+        btEje.Visible = true;
+
+    }
+
+    protected void btBaja_Click(object sender, EventArgs e)
+    {
+        Label3.Visible = false;
+        Label4.Visible = false;
+        TextBox1.Visible = false;
+        TextBox2.Visible = false;
+        btEje.Visible = true;
+    }
+
+    protected void btMod_Click(object sender, EventArgs e)
+    {
+        Label3.Visible = true;
+        Label4.Visible = true;
+        TextBox1.Visible = true;
+        TextBox2.Visible = true;
+        btEje.Visible = true;
+    }
 }

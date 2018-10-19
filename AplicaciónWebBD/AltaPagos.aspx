@@ -46,12 +46,18 @@
         </asp:Table>
     
         <br />
+        <asp:Button ID="btEje" runat="server" style="z-index: 1; left: 719px; top: 310px; position: absolute; height: 69px; width: 79px" Text="Ejecutar" Visible="False" />
         <br />
+        <asp:Button ID="btAlta" runat="server" OnClick="btAlta_Click" style="z-index: 1; left: 345px; top: 295px; position: absolute; width: 123px" Text="Alta pago" Visible="False" />
+        <asp:Label ID="Label3" runat="server" style="z-index: 1; left: 522px; top: 340px; position: absolute" Text="Monto:" Visible="False"></asp:Label>
         <br />
-&nbsp;&nbsp;&nbsp;
-            
-        <asp:GridView ID="GridView1" runat="server">
+&nbsp;&nbsp;&nbsp;<asp:Button ID="btBaja" runat="server" OnClick="btBaja_Click" style="z-index: 1; left: 344px; top: 325px; position: absolute; width: 124px; right: 638px" Text="Baja pago" Visible="False" />
+        <asp:Button ID="btMod" runat="server" OnClick="btMod_Click" style="z-index: 1; left: 344px; top: 359px; position: absolute; width: 123px" Text="Modifica pago" Visible="False" />
+        <asp:Label ID="Label4" runat="server" style="z-index: 1; left: 520px; top: 271px; position: absolute; right: 735px" Text="Fecha de pago:" Visible="False"></asp:Label>
+&nbsp;<asp:GridView ID="GridView1" runat="server">
         </asp:GridView>
+        <asp:TextBox ID="TextBox2" runat="server" style="z-index: 1; left: 518px; top: 368px; position: absolute" Visible="False"></asp:TextBox>
+        <asp:TextBox ID="TextBox1" runat="server" style="z-index: 1; left: 518px; top: 297px; position: absolute" Visible="False"></asp:TextBox>
             
     </div>
     </form>
