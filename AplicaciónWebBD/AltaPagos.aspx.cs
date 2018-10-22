@@ -17,6 +17,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
     DataSet DsPagos = new DataSet();
     DataSet DsPagos2 = new DataSet();
     DataRow Fila;
+  string op = "";
 
   protected void Page_Load(object sender, EventArgs e)
   {
@@ -31,7 +32,9 @@ public partial class AltasEmpleados : System.Web.UI.Page
           DropDownList1.Items.Add(" ");
           foreach (DataRow fila in DsClientes.Tables["Clientes"].Rows)
               DropDownList1.Items.Add(new ListItem(fila["nombre"].ToString(), fila["RFC"].ToString()));
+          TextBox1.Text = "" + DateTime.Now.Year+"-"+ DateTime.Now.Month+"-"+ DateTime.Now.Day;
       }
+
         
 
   }
@@ -92,6 +95,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
         GridView1.DataSource = DsPagos2.Tables["Pagos2"];  //Muestra resultados.
         GridView1.DataBind();
 
+    comunes.cargaDDL(ddlPago, DsPagos2, "Pagos2", "idPago");
         //Muestra los pagos realizados para el pedido seleccionado.
         //cadSql = "select * from PCPagos where FolioP=" + DDLPedidos.Text;
         //GestorBD.consBD(cadSql, DsPagos, "Pagos");
@@ -102,29 +106,61 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
     protected void btAlta_Click(object sender, EventArgs e)
     {
+    op = "alta";
         Label3.Visible = true;
         Label4.Visible = true;
         TextBox1.Visible = true;
         TextBox2.Visible = true;
         btEje.Visible = true;
+    ddlPago.Visible = false;
+    Label5.Visible = false;
 
-    }
+  }
 
     protected void btBaja_Click(object sender, EventArgs e)
     {
+    op = "baja";
         Label3.Visible = false;
         Label4.Visible = false;
         TextBox1.Visible = false;
         TextBox2.Visible = false;
         btEje.Visible = true;
-    }
+    ddlPago.Visible = true;
+    Label5.Visible = true;
+  }
 
     protected void btMod_Click(object sender, EventArgs e)
     {
-        Label3.Visible = true;
+    op = "modifica";
+    Label3.Visible = true;
         Label4.Visible = true;
         TextBox1.Visible = true;
         TextBox2.Visible = true;
         btEje.Visible = true;
+    ddlPago.Visible = true;
+    Label5.Visible = true;
     }
+
+  protected void btEje_Click(object sender, EventArgs e) {
+    if (op == "alta") {
+      cadSql = String.Format("insert into PCPagos VALUES ({0}, {1}, date'{2}', {3})", DropDownList2.SelectedValue, DsPagos2.Tables["Pagos2"].Rows.Count + 1, TextBox1.Text, TextBox2.Text);
+      Label1.Text = cadSql;
+      GestorBD.altaBD(cadSql);
+    }
+
+    switch (op) {
+      case "alta":
+        cadSql = String.Format("insert into PCPagos VALUES ({0}, {1}, date'{2}', {3})", DropDownList2.SelectedValue, DsPagos2.Tables["Pagos2"].Rows.Count + 1, TextBox1.Text, TextBox2.Text);
+        Label1.Text = cadSql;
+        GestorBD.altaBD(cadSql);
+        break;
+      case "baja":
+
+        break;
+      case "modifica":
+
+        break;
+
+    }
+  }
 }
