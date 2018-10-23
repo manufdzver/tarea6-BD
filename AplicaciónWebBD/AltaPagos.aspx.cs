@@ -6,24 +6,29 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 public partial class AltasEmpleados : System.Web.UI.Page
 {
-  GestorBD.GestorBD GestorBD;
-  string cadSql;
-  Comunes comunes = new Comunes();
+    GestorBD.GestorBD GestorBD;
+    string cadSql;
+    Comunes comunes = new Comunes();
 
-  DataSet DsClientes = new DataSet();
-  DataSet DsPedidos = new DataSet();
+    DataSet DsClientes = new DataSet();
+    DataSet DsPedidos = new DataSet();
     DataSet DsPagos = new DataSet();
     DataSet DsPagos2 = new DataSet();
+    DataSet DsPagos3 = new DataSet();
     DataRow Fila;
-  string op = "";
+    
+     
 
   protected void Page_Load(object sender, EventArgs e)
   {
+
       if(!IsPostBack)
       {
-          string rfc = Session["rfc"].ToString();
+            Session["op"] = "";
+            string rfc = Session["rfc"].ToString();
           GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
 
           cadSql = "select u.nombre, u.RFC from PCUsuarios u, PCClientes c, PCPedidos p where u.RFC=c.RFC and c.RFC=p.RFCC and p.RFCE='" + rfc + "'";
@@ -83,9 +88,6 @@ public partial class AltasEmpleados : System.Web.UI.Page
             
         }
 
-    
-
-
         //Un GridView, que también se mostrará al momento de seleccionar un pedido, 
         //con los datos de cada pago realizado por el cliente para ese pedido: 
         //clave, fecha y monto del pago (posiblemente aquí puedas reutilizar código).
@@ -106,7 +108,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
     protected void btAlta_Click(object sender, EventArgs e)
     {
-    op = "alta";
+        Session["op"] = "alta";
         Label3.Visible = true;
         Label4.Visible = true;
         TextBox1.Visible = true;
@@ -119,7 +121,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
     protected void btBaja_Click(object sender, EventArgs e)
     {
-    op = "baja";
+        Session["op"] = "baja";
         Label3.Visible = false;
         Label4.Visible = false;
         TextBox1.Visible = false;
@@ -131,7 +133,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
     protected void btMod_Click(object sender, EventArgs e)
     {
-    op = "modifica";
+        Session["op"] = "modifica";
     Label3.Visible = true;
         Label4.Visible = true;
         TextBox1.Visible = true;
@@ -141,26 +143,41 @@ public partial class AltasEmpleados : System.Web.UI.Page
     Label5.Visible = true;
     }
 
-  protected void btEje_Click(object sender, EventArgs e) {
-    if (op == "alta") {
-      cadSql = String.Format("insert into PCPagos VALUES ({0}, {1}, date'{2}', {3})", DropDownList2.SelectedValue, DsPagos2.Tables["Pagos2"].Rows.Count + 1, TextBox1.Text, TextBox2.Text);
-      Label1.Text = cadSql;
-      GestorBD.altaBD(cadSql);
+
+
+
+    protected void btEje_Click(object sender, EventArgs e)
+    {
+        GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
+        cadSql = "select distinct f.idPago, f.fecha, f.monto from PCPagos f, PCPedidos p where " +
+            "f.FolioP = '" + DropDownList2.SelectedValue + "' order by f.idPago asc";
+        GestorBD.consBD(cadSql, DsPagos3, "Pagos3");
+        switch (Session["op"].ToString())
+        {
+            case "alta":
+                int num = DsPagos3.Tables["Pagos3"].Rows.Count + 1;
+                cadSql = "insert into PCPagos VALUES ("+ DropDownList2.SelectedValue.ToString() + ", "+ num + ", date'" + TextBox1.Text + "', "+ TextBox2.Text + ")";
+                Label1.Text = cadSql;
+                GestorBD.altaBD(cadSql);
+                Label3.Visible = false;
+                Label4.Visible = false;
+                TextBox1.Visible = false;
+                TextBox2.Visible = false;
+                btEje.Visible = false;
+                ddlPago.Visible = false;
+                Label5.Visible = true;
+                TextBox1.Text = "";
+                TextBox2.Text = "";
+
+                break;
+            case "baja":
+
+                break;
+            case "modifica":
+
+                break;
+        }
+
+
     }
-
-    switch (op) {
-      case "alta":
-        cadSql = String.Format("insert into PCPagos VALUES ({0}, {1}, date'{2}', {3})", DropDownList2.SelectedValue, DsPagos2.Tables["Pagos2"].Rows.Count + 1, TextBox1.Text, TextBox2.Text);
-        Label1.Text = cadSql;
-        GestorBD.altaBD(cadSql);
-        break;
-      case "baja":
-
-        break;
-      case "modifica":
-
-        break;
-
-    }
-  }
 }
