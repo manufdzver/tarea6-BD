@@ -156,8 +156,12 @@ public partial class AltasEmpleados : System.Web.UI.Page
         {
             case "alta":
                 int num = DsPagos3.Tables["Pagos3"].Rows.Count + 1;
+<<<<<<< HEAD
                 cadSql = "insert into PCPagos VALUES (" + DropDownList2.SelectedValue.ToString() + ", " + num + ", date'" + TextBox1.Text + "', " + TextBox2.Text + ")";
                 Label1.Text = cadSql;
+=======
+                cadSql = "insert into PCPagos VALUES ("+ DropDownList2.SelectedValue.ToString() + ", "+ num + ", date'" + TextBox1.Text + "', "+ TextBox2.Text + ")";
+>>>>>>> 1cf4f77970ffb049618cf2061d88d3dffbb202a4
                 GestorBD.altaBD(cadSql);
                 Label3.Visible = false;
                 Label4.Visible = false;
@@ -165,11 +169,15 @@ public partial class AltasEmpleados : System.Web.UI.Page
                 TextBox2.Visible = false;
                 btEje.Visible = false;
                 ddlPago.Visible = false;
-                Label5.Visible = true;
+                Label5.Visible = false;
                 TextBox1.Text = "";
                 TextBox2.Text = "";
                 break;
             case "baja":
+                cadSql = "delete from PCPagos where FolioP=" + DropDownList2.SelectedValue.ToString() + " and IdPago= "+ddlPago.Text + "";
+                GestorBD.altaBD(cadSql);
+                DropDownList2.SelectedIndex = 0;
+                ddlPago.Visible = false;
 
                 break;
             case "modifica":
