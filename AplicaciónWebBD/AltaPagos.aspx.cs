@@ -156,7 +156,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
         {
             case "alta":
                 int num = DsPagos3.Tables["Pagos3"].Rows.Count + 1;
-                cadSql = "insert into PCPagos VALUES ("+ DropDownList2.SelectedValue.ToString() + ", "+ num + ", date'" + TextBox1.Text + "', "+ TextBox2.Text + ")";
+                cadSql = "insert into PCPagos VALUES (" + DropDownList2.SelectedValue.ToString() + ", " + num + ", date'" + TextBox1.Text + "', " + TextBox2.Text + ")";
                 Label1.Text = cadSql;
                 GestorBD.altaBD(cadSql);
                 Label3.Visible = false;
@@ -168,13 +168,23 @@ public partial class AltasEmpleados : System.Web.UI.Page
                 Label5.Visible = true;
                 TextBox1.Text = "";
                 TextBox2.Text = "";
-
                 break;
             case "baja":
 
                 break;
             case "modifica":
-
+                cadSql = "update PCPagos set fecha = date'" + TextBox1.Text + "', monto=" + TextBox2.Text + " where folioP = "+ DropDownList2.SelectedValue.ToString() + " and idPago = " + ddlPago.SelectedValue.ToString();
+                Label1.Text = cadSql;
+                GestorBD.cambiaBD(cadSql);
+                Label3.Visible = false;
+                Label4.Visible = false;
+                TextBox1.Visible = false;
+                TextBox2.Visible = false;
+                btEje.Visible = false;
+                ddlPago.Visible = false;
+                Label5.Visible = true;
+                TextBox1.Text = "";
+                TextBox2.Text = "";
                 break;
         }
 
