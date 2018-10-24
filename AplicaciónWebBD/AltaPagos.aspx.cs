@@ -37,7 +37,7 @@ public partial class AltasEmpleados : System.Web.UI.Page
           DropDownList1.Items.Add(" ");
           foreach (DataRow fila in DsClientes.Tables["Clientes"].Rows)
               DropDownList1.Items.Add(new ListItem(fila["nombre"].ToString(), fila["RFC"].ToString()));
-          TextBox1.Text = "" + DateTime.Now.Year+"-"+ DateTime.Now.Month+"-"+ DateTime.Now.Day;
+          
       }
 
         
@@ -47,7 +47,24 @@ public partial class AltasEmpleados : System.Web.UI.Page
 
   protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
   {
-      Label2.Visible = true;
+        //Primero restablecemos todos los valores y cajas
+
+        Label3.Visible = false;
+        Label4.Visible = false;
+        TextBox1.Visible = false;
+        TextBox2.Visible = false;
+        btEje.Visible = false;
+        ddlPago.Visible = false;
+        Table1.Visible = false;
+        GridView1.Visible = false;
+        Label5.Visible = false;
+        TextBox1.Text = "";
+        TextBox2.Text = "";
+        btAlta.Visible = false;
+        btBaja.Visible = false;
+        btMod.Visible = false;
+
+        Label2.Visible = true;
       DropDownList2.Visible = true;
       GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
       cadSql = "select distinct p.FolioP from  PCPedidos p, PCClientes c, PCEmpleados e where p.RFCC = '"+
@@ -67,7 +84,8 @@ public partial class AltasEmpleados : System.Web.UI.Page
         btAlta.Visible = true;
         btBaja.Visible = true;
         btMod.Visible = true;
-      GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
+        GridView1.Visible = true;
+        GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
       cadSql = "select fechaPed, pe.monto, sum(distinct(pa.monto)) as saldo, pe.monto-sum(distinct(pa.monto)) as deuda " +
             "from PCPagos pa, PCPedidos pe, PCClientes c, PCEmpleados e where pe.RFCC = '"+
             DropDownList1.SelectedValue+"' and pe.RFCE = '"+ Session["rfc"].ToString()+
@@ -116,8 +134,9 @@ public partial class AltasEmpleados : System.Web.UI.Page
         btEje.Visible = true;
     ddlPago.Visible = false;
     Label5.Visible = false;
+        TextBox1.Text = "" + DateTime.Now.Year + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day;
 
-  }
+    }
 
     protected void btBaja_Click(object sender, EventArgs e)
     {
@@ -156,12 +175,9 @@ public partial class AltasEmpleados : System.Web.UI.Page
         {
             case "alta":
                 int num = DsPagos3.Tables["Pagos3"].Rows.Count + 1;
-<<<<<<< HEAD
+
                 cadSql = "insert into PCPagos VALUES (" + DropDownList2.SelectedValue.ToString() + ", " + num + ", date'" + TextBox1.Text + "', " + TextBox2.Text + ")";
-                Label1.Text = cadSql;
-=======
-                cadSql = "insert into PCPagos VALUES ("+ DropDownList2.SelectedValue.ToString() + ", "+ num + ", date'" + TextBox1.Text + "', "+ TextBox2.Text + ")";
->>>>>>> 1cf4f77970ffb049618cf2061d88d3dffbb202a4
+
                 GestorBD.altaBD(cadSql);
                 Label3.Visible = false;
                 Label4.Visible = false;
@@ -182,7 +198,6 @@ public partial class AltasEmpleados : System.Web.UI.Page
                 break;
             case "modifica":
                 cadSql = "update PCPagos set fecha = date'" + TextBox1.Text + "', monto=" + TextBox2.Text + " where folioP = "+ DropDownList2.SelectedValue.ToString() + " and idPago = " + ddlPago.SelectedValue.ToString();
-                Label1.Text = cadSql;
                 GestorBD.cambiaBD(cadSql);
                 Label3.Visible = false;
                 Label4.Visible = false;
