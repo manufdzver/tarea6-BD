@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSAlumCalifs" targetNamespace="http://tempuri.org/DSAlumCalifs.xsd" xmlns:mstns="http://tempuri.org/DSAlumCalifs.xsd" xmlns="http://tempuri.org/DSAlumCalifs.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConexiónOracle" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConexiónOracle (Settings)" PropertyReference="ApplicationSettings.ClienteServidor.Properties.Settings.GlobalReference.Default.ConexiónOracle" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ALUMCALIFSTableAdapter" GeneratorDataComponentClassName="ALUMCALIFSTableAdapter" Name="ALUMCALIFS" UserDataComponentName="ALUMCALIFSTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConexiónOracle (Settings)" DbObjectName="BD07.ALUMCALIFS" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT NOMAL, NOMMAT, CALIF, FECHA FROM BD07.ALUMCALIFS</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NOMAL" DataSetColumn="NOMAL" />
+              <Mapping SourceColumn="NOMMAT" DataSetColumn="NOMMAT" />
+              <Mapping SourceColumn="CALIF" DataSetColumn="CALIF" />
+              <Mapping SourceColumn="FECHA" DataSetColumn="FECHA" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSAlumCalifs" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DSAlumCalifs" msprop:Generator_UserDSName="DSAlumCalifs">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ALUMCALIFS" msprop:Generator_TableClassName="ALUMCALIFSDataTable" msprop:Generator_TableVarName="tableALUMCALIFS" msprop:Generator_TablePropName="ALUMCALIFS" msprop:Generator_RowDeletingName="ALUMCALIFSRowDeleting" msprop:Generator_RowChangingName="ALUMCALIFSRowChanging" msprop:Generator_RowEvHandlerName="ALUMCALIFSRowChangeEventHandler" msprop:Generator_RowDeletedName="ALUMCALIFSRowDeleted" msprop:Generator_UserTableName="ALUMCALIFS" msprop:Generator_RowChangedName="ALUMCALIFSRowChanged" msprop:Generator_RowEvArgName="ALUMCALIFSRowChangeEvent" msprop:Generator_RowClassName="ALUMCALIFSRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NOMAL" msprop:Generator_ColumnVarNameInTable="columnNOMAL" msprop:Generator_ColumnPropNameInRow="NOMAL" msprop:Generator_ColumnPropNameInTable="NOMALColumn" msprop:Generator_UserColumnName="NOMAL" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOMMAT" msprop:Generator_ColumnVarNameInTable="columnNOMMAT" msprop:Generator_ColumnPropNameInRow="NOMMAT" msprop:Generator_ColumnPropNameInTable="NOMMATColumn" msprop:Generator_UserColumnName="NOMMAT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CALIF" msprop:Generator_ColumnVarNameInTable="columnCALIF" msprop:Generator_ColumnPropNameInRow="CALIF" msprop:Generator_ColumnPropNameInTable="CALIFColumn" msprop:Generator_UserColumnName="CALIF" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FECHA" msprop:Generator_ColumnVarNameInTable="columnFECHA" msprop:Generator_ColumnPropNameInRow="FECHA" msprop:Generator_ColumnPropNameInTable="FECHAColumn" msprop:Generator_UserColumnName="FECHA" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
